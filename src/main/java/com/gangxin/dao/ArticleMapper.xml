@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gangxin.dao.ArticleMapper">
+
+   	<select id="list" resultType="com.gangxin.entity.ArticleWithBLOBs">
+   	
+   	SELECT * from cms_article a LEFT JOIN cms_user b ON a.user_id=b.id
+   	<where>
+   	   <if test="d1 != null and d1 != ''">
+   	      a.created >= #{d1}
+   	   </if>
+   	   <if test="d2 != null and d2 != ''">
+   	      and a.created &lt;= #{d2}
+   	   </if>
+   	</where>
+   	</select>
+   	
+   	
+   	<select id="list2" resultType="com.gangxin.entity.ArticleWithBLOBs">
+   	
+   	SELECT * from cms_article  ORDER BY created
+   	</select>
+   	
+   	<select id="list3" resultType="com.gangxin.entity.ArticleWithBLOBs">
+   	
+   	SELECT * from cms_article a LEFT JOIN cms_user b ON a.user_id=b.id ORDER BY b.username
+   	</select>
+
+
+</mapper>
